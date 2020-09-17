@@ -1,13 +1,14 @@
 package app
 
 import (
+	"log"
 	"os"
 
 	"github.com/ezedinff/appzoid/config"
 	"github.com/ezedinff/appzoid/database"
 	"github.com/ezedinff/appzoid/models"
 	"github.com/ezedinff/appzoid/routes"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 // App global variable for fiber app instance
@@ -26,12 +27,16 @@ func Serve() {
 	routes.RegisterRoute(App)
 	database.DatabaseInit()
 	database.GetDB().Debug().AutoMigrate(&models.User{})
-	PORT := os.Getenv("PORT")
-	if PORT == "" {
-		PORT = config.AppConfig.App_Port
+	// Get the PORT from heroku env
+	port := os.Getenv("PORT")
+
+	// Verify if heroku provided the port or not
+	if os.Getenv("PORT") == "" {
+		port = ":3000"
 	}
-	err := App.Listen(PORT)
+	err := App.Listen(port)
 	if err != nil {
+		log.Fatal(err)
 		panic("App not starting: " + err.Error() + "on Port: " + config.AppConfig.App_Port)
 	}
 }

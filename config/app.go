@@ -14,6 +14,7 @@ type AppConfiguration struct {
 	App_Key         string
 	App_Url         string
 	App_Port        string
+	SECRET          string
 }
 
 var AppConfig *AppConfiguration //nolint:gochecknoglobals

@@ -2,7 +2,7 @@ package routes
 
 import (
 	"github.com/ezedinff/appzoid/controllers"
-	"github.com/gofiber/fiber"
+	"github.com/gofiber/fiber/v2"
 )
 
 func APIRoutes(app *fiber.App) {
@@ -15,8 +15,14 @@ func APIVersions(api fiber.Router) {
 }
 func v1Routes(api fiber.Router) {
 	v1 := api.Group("/v1")
-	v1.Get("/users", controllers.FinaAllUsers)
+	userRoute(v1)
 }
-func echo(ctx *fiber.Ctx) {
-	ctx.Send("Hello")
+
+func userRoute(v fiber.Router) {
+	// User
+	user := v.Group("/user")
+	user.Get("/:id", controllers.GetUser)
+	user.Post("/", controllers.CreateUser)
+	user.Patch("/:id", controllers.UpdateUser)
+	user.Delete("/:id", controllers.DeleteUser)
 }

@@ -3,8 +3,11 @@ module github.com/ezedinff/appzoid
 go 1.15
 
 require (
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gofiber/basicauth v0.2.2 // indirect
 	github.com/gofiber/fiber v1.14.6
+	github.com/gofiber/fiber/v2 v2.0.1
+	github.com/gofiber/jwt/v2 v2.0.0
 	github.com/gofiber/logger v0.2.4
 	github.com/joho/godotenv v1.3.0
 	github.com/lib/pq v1.8.0 // indirect
@@ -13,4 +16,5 @@ require (
 	golang.org/x/crypto v0.0.0-20200820211705-5c72a883971a
 	gorm.io/driver/postgres v1.0.0
 	gorm.io/gorm v1.20.1
+	honnef.co/go/tools v0.0.1-2019.2.3
 )
