@@ -32,9 +32,9 @@ func Serve() {
 
 	// Verify if heroku provided the port or not
 	if os.Getenv("PORT") == "" {
-		port = ":3000"
+		port = "3000"
 	}
-	err := App.Listen(port)
+	err := App.Listen(":" + port)
 	if err != nil {
 		log.Fatal(err)
 		panic("App not starting: " + err.Error() + "on Port: " + config.AppConfig.App_Port)
